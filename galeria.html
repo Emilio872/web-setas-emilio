@@ -302,6 +302,38 @@ section {
         max-width: 250px;
     }
 }
+/* ===== SOLUCIÓN DEFINITIVA PARA MÓVIL ===== */
+@media (max-width: 768px) {
+
+.layout {
+    flex-direction: column !important;
+}
+
+.sidebar {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    max-height: none !important;
+    z-index: auto !important;
+}
+
+.contenido {
+    width: 100% !important;
+}
+
+.especies {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+}
+
+.especie img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+}
 
 
 </style>
