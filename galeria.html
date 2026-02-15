@@ -302,38 +302,44 @@ section {
         max-width: 250px;
     }
 }
-/* ===== SOLUCIÓN DEFINITIVA PARA MÓVIL ===== */
+/* ===== SOLUCIÓN DEFINITIVA REAL PARA MÓVIL ===== */
 @media (max-width: 768px) {
 
 .layout {
-    flex-direction: column !important;
+    display: block !important;
 }
 
 .sidebar {
-    position: relative !important;
-    top: auto !important;
+    position: static !important;
     width: 100% !important;
     max-height: none !important;
-    z-index: auto !important;
+    overflow: visible !important;
+    margin-bottom: 20px !important;
 }
 
 .contenido {
     width: 100% !important;
+    display: block !important;
 }
 
 .especies {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
+    gap: 12px !important;
+}
+
+.especie {
+    position: relative !important;
 }
 
 .especie img {
     width: 100% !important;
     height: auto !important;
-    display: block !important;
+    position: relative !important;
 }
 
 }
+
 
 
 </style>
