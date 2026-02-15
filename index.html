@@ -9,80 +9,344 @@
 
 <style id="estilos2026">
 
-/* ===== BASE ===== */
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #eef4ef;
-    margin: 0;
-    padding: 0;
-    color: #2f5d3a;
-}
 
-/* ===== LAYOUT ===== */
-.layout {
-    display: flex;
-    gap: 20px;
-}
-
-/* SIDEBAR */
-.sidebar {
-    width: 260px;
-    background: #ffffff;
-    border: 2px solid #5a8f65;
-    border-radius: 12px;
-    padding: 15px;
-}
-
-/* CONTENIDO */
-.contenido {
-    flex: 1;
-    position: relative;
-    z-index: 2;
-}
-
-/* GALERÍA */
-.especies {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px;
-}
-
-.especie {
-    position: relative;
-    z-index: 3;
-}
-
-.especie img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 3px solid #5a8f65;
-}
-
-/* ===== MÓVIL ===== */
-@media (max-width: 768px) {
-
-.layout {
-    flex-direction: column;
-}
-
-.sidebar {
-    width: 100%;
-}
-
-.contenido {
-    width: 100%;
-}
-
-.especies {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-}
-
-</style>
-
+    /* ===== BASE ===== */
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #eef4ef;
+        margin: 0;
+        padding: 0;
+        color: #2f5d3a;
+    }
+    
+    section {
+        padding: 30px 20px;
+        max-width: 900px;
+        margin: 20px auto;
+        background: #f1f6f2;
+        border: 2px solid #5a8f65;
+        border-radius: 16px;
+    }
+    
+    /* ===== CABECERA ===== */
+    .hero {
+        background: linear-gradient(135deg, #3f6f4e, #5a8f65);
+        padding: 50px 20px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+    
+    .hero h1 {
+        margin: 20px 0 10px;
+    }
+    
+    .hero .frase {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+    
+    .foto-perfil {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid white;
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+    
+    /* ===== BUSCADOR ===== */
+    .buscador-container {
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    
+    #buscadorGenero {
+        width: 100%;
+        padding: 8px;
+        border-radius: 8px;
+        border: 2px solid #5a8f65;
+    }
+    
+    /* ===== LAYOUT ===== */
+    .layout {
+        display: flex;
+        gap: 25px;
+    }
+    
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+        width: 260px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: sticky;
+        top: 100px;
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 10px;
+        z-index: 100; /* asegura que esté encima de secciones menos importantes */
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .sidebar li {
+        cursor: pointer;
+        padding: 6px 8px;
+        border-radius: 6px;
+    }
+    
+    .sidebar li:hover {
+        background: #ddd;
+    }
+    
+    .sidebar li.activo {
+        background: #5a8f65;
+        color: white;
+    }
+    
+    /* ===== CONTENIDO ===== */
+    .contenido {
+        flex: 1;
+    }
+    
+    /* ===== GALERÍA DE ESPECIES ===== */
+    .tabcontent {
+        display: none;
+    }
+    
+    .especies {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+        background: #f1f6f2;
+        padding: 10px;
+        border-radius: 12px;
+    }
+    
+    .especie {
+        text-align: center;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .especie img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.2s ease;   
+    }
+    
+    .especie img:hover {
+        transform: scale(1.05);
+    }
+    
+    .especie span {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.9em;
+        z-index: 10;
+    }
+    
+    /* ===== LIGHTBOX ===== */
+    #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999; /* siempre encima de todo */
+    }
+    
+    #lightbox img {
+        max-width: 90vw;
+        max-height: 75vh;
+        border-radius: 10px;
+    }
+    
+    #lightboxTexto {
+        color: white;
+        margin-top: 12px;
+        background: rgba(0,0,0,0.6);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 1.2em;
+        text-align: center;
+        font-style: italic;
+        letter-spacing: 0.4px;
+    }
+    
+    .flecha {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.6);
+        color: white;
+        border: none;
+        font-size: 30px;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 50%;
+        z-index: 10000;
+    }
+    
+    .flecha.izquierda {
+        left: 20px;
+    }
+    
+    .flecha.derecha {
+        right: 20px;
+    }
+    
+    .flecha:hover {
+        background: rgba(0,0,0,0.9);
+    }
+    
+    /* ===== SALIDAS ===== */
+    #salidas-campo {
+        margin-bottom: 50px;
+    }
+    
+    .salida {
+        background: #ffffff;
+        border: 2px solid #5a8f65;
+        border-radius: 14px;
+        padding: 20px;
+        margin-top: 25px;
+    }
+    
+    .salida h3 {
+        margin-top: 0;
+        color: #2f5d3a;
+    }
+    
+    .fecha, .lugar {
+        font-size: 14px;
+        color: #777;
+    }
+    
+    .lugar {
+        margin-bottom: 10px;
+        color: #3f6f4e;
+    }
+    
+    .fotos-salida {
+        display: flex;
+        gap: 12px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+        z-index: 10;
+    }
+    
+    .fotos-salida img {
+        width: 140px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    .flecha {
+        position: absolute;
+    }
+    
+    /* ===== ESTILOS LISTA DE GÉNEROS ===== */
+    #listaGeneros {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    #listaGeneros li {
+        margin-bottom: 8px;
+        color: black;
+        font-size: 16px;
+    }
+    
+    #listaGeneros span {
+        color: green !important;
+        font-weight: bold;
+        margin-left: 6px;
+    }
+    
+    /* ===== MÓVIL ===== */
+    @media (max-width: 768px) {
+        .layout {
+            flex-direction: column;
+        }
+    
+        .sidebar {
+            width: 100%;
+            max-height: 200px;
+        }
+    
+        .especies {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            padding: 5px;
+        }
+    
+        .especie img {
+            height: 140px;
+        }
+    
+        .fotos-salida img {
+            width: 100%;
+            max-width: 250px;
+        }
+    }
+    /* ===== SOLUCIÓN DEFINITIVA REAL PARA MÓVIL ===== */
+    @media (max-width: 768px) {
+    
+    .layout {
+        display: block !important;
+    }
+    
+    .sidebar {
+        position: static !important;
+        width: 100% !important;
+        max-height: none !important;
+        overflow: visible !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .contenido {
+        width: 100% !important;
+        display: block !important;
+    }
+    
+    .especies {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    .especie {
+        position: relative !important;
+    }
+    
+    .especie img {
+        width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+    }
+    
+    }
+    
+    body {
+        background: red !important;
+    }
+    
+    
+    </style>
 </head>
 
 <body>
@@ -1432,4 +1696,3 @@ document.addEventListener("keydown", (e) => {
 
 </body>
 </html>
-
