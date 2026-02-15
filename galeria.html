@@ -113,32 +113,37 @@ section {
     position: relative;  /* referencia para la galería */
     z-index: 2;
 }
-
-/* ===== GALERÍA ===== */
+/* ====== GALERÍA DE ESPECIES ====== */
 .tabcontent {
-    display: none;
+    display: none; /* solo se muestra la pestaña activa */
 }
 
 .especies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 15px;
-    position: relative;
-    z-index: 10;  /* asegura que esté encima de otros elementos */
+    position: relative;   /* importante para z-index */
+    z-index: 10;          /* asegura que esté por encima de otros elementos */
+    background: #f1f6f2;  /* opcional: fondo claro para evitar que se vea detrás */
+    padding: 10px;
+    border-radius: 12px;
 }
 
 .especie {
     text-align: center;
+    position: relative;    /* permite controlar z-index de cada especie */
+    z-index: 10;
 }
 
 .especie img {
     width: 100%;
-    height: auto;
+    height: 160px;
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s ease;
-    z-index: 2;
+    position: relative;     /* necesario para z-index */
+    z-index: 10;
 }
 
 .especie img:hover {
@@ -149,7 +154,79 @@ section {
     display: block;
     margin-top: 6px;
     font-size: 0.9em;
+    z-index: 10;
 }
+
+/* ====== LIGHTBOX ====== */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999; /* muy alto para estar siempre encima */
+}
+
+#lightbox img {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 10px;
+}
+
+#lightboxTexto {
+    color: white;
+    margin-top: 12px;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.4px;
+}
+
+/* Flechas del lightbox */
+.flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10000; /* encima de todo */
+}
+
+.flecha.izquierda {
+    left: 20px;
+}
+
+.flecha.derecha {
+    right: 20px;
+}
+
+.flecha:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+/* ====== MÓVIL ====== */
+@media (max-width: 768px) {
+    .especies {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+        padding: 5px;
+    }
+
+    .especie img {
+        height: 140px;
+    }
+}
+
 
 /* ===== SALIDAS ===== */
 #salidas-campo {
@@ -193,61 +270,7 @@ section {
     cursor: pointer;
 }
 
-/* ===== LIGHTBOX ===== */
-#lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 1000;
-}
 
-#lightbox img {
-    max-width: 90vw;
-    max-height: 75vh;
-    border-radius: 10px;
-}
-
-#lightboxTexto {
-    color: white;
-    margin-top: 12px;
-    background: rgba(0,0,0,0.6);
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 1.2em;
-    text-align: center;
-    font-style: italic;
-    letter-spacing: 0.4px;
-}
-
-/* ===== FLECHAS LIGHTBOX ===== */
-.flecha {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    font-size: 30px;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-.flecha.izquierda {
-    left: 20px;
-}
-
-.flecha.derecha {
-    right: 20px;
-}
-
-.flecha:hover {
-    background: rgba(0,0,0,0.9);
-}
 
 /* ===== FOOTER ===== */
 footer {
