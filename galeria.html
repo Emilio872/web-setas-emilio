@@ -282,6 +282,28 @@ footer {
     }
 }
 
+/* Asegura que la galería esté por encima de otros elementos */
+.tabcontent {
+    position: relative; /* importante */
+    z-index: 10;        /* un valor alto para que se muestre arriba */
+}
+
+/* Asegura que cada imagen se vea correctamente */
+.especie img {
+    position: relative;
+    z-index: 11;       /* más alto que el contenedor */
+}
+
+/* Ajuste para móvil */
+@media (max-width: 768px) {
+    .tabcontent {
+        z-index: 10;
+    }
+
+    .especie img {
+        z-index: 11;
+    }
+}
 
 </style>
 </head>
