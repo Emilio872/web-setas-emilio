@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotografía de setas · Emilio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== BASE ===== */
+body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #eef4ef;
+        margin: 0;
+        padding: 0;
+        color: #2f5d3a;
+    }
+
+    section {
+        padding: 30px 20px;
+        max-width: 900px;
+        margin: 20px auto;
+        background: #f1f6f2;
+        border: 2px solid #5a8f65;
+        border-radius: 16px;
+    }
+
+    /* ===== CABECERA ===== */
+    .hero {
+        background: linear-gradient(135deg, #3f6f4e, #5a8f65);
+        padding: 50px 20px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    .hero h1 {
+        margin: 20px 0 10px;
+    }
+
+    .hero .frase {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+
+    .foto-perfil {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid white;
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+
+/* ====== BUSCADOR ====== */
+.buscador-container {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+#buscadorGenero {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #5a8f65;
+}
+
+/* ====== LAYOUT ====== */
+.layout {
+    display: flex;
+    gap: 25px;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+    width: 240px;
+    max-height: 75vh;
+    overflow-y: auto;
+    background: #fff;
+    border: 2px solid #5a8f65;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.sidebar li:hover {
+    background: #dfece3;
+}
+
+.sidebar li.activo {
+    background: #5a8f65;
+    color: white;
+}
+
+/* ====== CONTENIDO ====== */
+.contenido {
+    flex: 1;
+}
+
+/* ====== GALERÍA ====== */
+.tabcontent {
+    display: none;
+}
+
+.especies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.especie {
+    width: 160px;
+    text-align: center;
+}
+
+.especie img {
+    width: 100%;
+    border-radius: 8px;
+    border: 3px solid #5a8f65;
+    cursor: pointer;
+}
+
+.especie span {
+    display: block;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* ====== LIGHTBOX ====== */
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+/* Imagen dentro del lightbox */
+#lightbox img {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 10px;
+}
+
+/* Texto de la especie debajo de la imagen */
+#lightboxTexto {
+    color: white;                   /* texto blanco */
+    margin-top: 12px;
+    background: rgba(0,0,0,0.6);    /* fondo semitransparente */
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 1.2em;               /* tamaño de fuente legible */
+    text-align: center;             /* centrado */
+    font-style: italic;              /* toque pro */
+    letter-spacing: 0.4px;           /* toque pro */
+}
+
+
+/* ====== FOOTER ====== */
+footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* ====== MÓVIL ====== */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: 200px;
+    }
+
+    .especies {
+        justify-content: center;
+    }
+}
+.layout {
+    display: flex;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 260px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 100px;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.sidebar li:hover {
+    background: #ddd;
+}
+.contenido {
+    flex: 1;
+}
+
+.especies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.especie {
+    text-align: center;
+}
+
+.especie img {
+    width: 90%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.especie img:hover {
+    transform: scale(1.05);
+}
+
+.especie span {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.9em;
+}
+
+/* Estilo de la lista */
+#listaGeneros {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #listaGeneros li {
+        margin-bottom: 8px;
+        color: black; /* color del nombre del género */
+        font-size: 16px;
+    }
+
+    /* Estilo de los números */
+    #listaGeneros span {
+        color: green !important; /* fuerza el verde */
+        font-weight: bold;
+        margin-left: 6px;
+    }
+
+    #salidas-campo {
+    margin-bottom: 50px;
+}
+
+.salida {
+    background: #ffffff;
+    border: 2px solid #5a8f65;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.salida h3 {
+    margin-top: 0;
+    color: #2f5d3a;
+}
+
+.fecha {
+    font-size: 14px;
+    color: #777;
+}
+
+.lugar {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #3f6f4e;
+}
+
+
+.fotos-salida {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.fotos-salida img {
+    width: 140px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .fotos-salida img {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+.flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.flecha.izquierda {
+    left: 20px;
+}
+
+.flecha.derecha {
+    right: 20px;
+}
+
+.flecha:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+
+</style>
+</head>
+
+<body>
+    
+    <!-- CABECERA -->
+    <header class="hero">
+        <img src="foto.jpg" alt="Foto de Emilio" class="foto-perfil">
+        <h1>Emilio José Salvador Fernández</h1>
+        <p class="frase">Fotografía de setas · Naturaleza · Aprendizaje</p>
+    </header>
+
+    <!-- SOBRE MÍ -->
+    <section>
+        <h2>Sobre mí</h2>
+        <p>Me apasiona la naturaleza y estoy empezando en el mundo de la fotografía de setas. Aquí compartiré mis aprendizajes y algunas fotos.</p>
+    </section>
+
+
+    <section id="salidas-campo">
+        <h2>Salidas al campo</h2>
+        <p>Crónicas de mis salidas micológicas.</p>
+    
+        <div id="contenedor-salidas"> 
+
+    
+        <article class="salida">
+            <h3>🍄 Cuenca</h3>
+            <span class="fecha">01 de febrero de 2026</span>
+            <p class="lugar">📍 La Manchuela</p>
+    
+            <p>
+                Jornada húmeda y con buena temperatura.
+                En bosque de ribera, con predominio de Populus nigra ya muy viejos. 
+                La intención de esta salida era poder fotografiar la Sarcoscypha coccinea, tanto la roja,
+                como una que hay amarilla. Al final solo pudo ser la roja y algún Mixomycete.
+        
+            </p>
+    
+            <div class="fotos-salida">
+                <img src="imagenesdesalidas/salida1/lamanchuela1.jpg" alt="Sarcoscypha coccinea" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida1/lamanchuela2.jpg" alt="Didymium squamulosum" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida1/lamanchuela3.jpg" alt="Comatricha nigra" onclick="abrirLightbox(this)">
+            </div>
+        </article>
+    
+    </section>
+    
+
+<section>
+<h2>Fotografía de setas</h2>
+
+
+<div class="buscador-container">
+    <input id="buscadorGenero" type="text" placeholder="Buscar género..." onkeyup="filtrar()">
+</div>
+
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h3>Géneros</h3>
+        <ul id="listaGeneros">
+          <li onclick="mostrarGenero('aleuria')">Amanita <span class="contador">1</span></li> 
+          <li onclick="mostrarGenero('amanita')">Amanita <span class="contador">15</span></li>
+          <li onclick="mostrarGenero('amaropostia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('arachnopezia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('arcyria')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('auricularia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('batarrae')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('boletus')">Amanita <span class="contador">5</span></li>
+          <li onclick="mostrarGenero('butyriboletus')">Lactarius <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('caloboletus')">Boletus <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('calocera')">Cantharellus <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('calocybe')">Agaricus <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('cantharellus')">Coprinus <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('ceratiomyxa')">Clitocybe <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('ceriporia')">Psilocybe <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('cheilymenia')">Mycena <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('chlorociboria')">Hypholoma <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('comatricha')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('coprinopsis')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('cratarellus')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('craterium')">Amanita <span class="contador">3</span></li>
+          <li onclick="mostrarGenero('cyclocybe')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('diachea')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('fistulina')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('flavolasquia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('ganoderma')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('guepiniopsis')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('gyroporus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('helvella')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('hemileccinum')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('hericium')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('Hohembuehelia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('hydropisphaera')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('hygrophorus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('imperator')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('kuehneromyces')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lactarius')">Amanita <span class="contador">7</span></li>
+          <li onclick="mostrarGenero('laetiporus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lanmaoa')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lasiobelonium')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('leccinellum')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lentinus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lycogala')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('lyophyllum')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('macrolepiota')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('mollisia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('morchella')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('mucidula')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('mycena')">Amanita <span class="contador">8</span></li>
+          <li onclick="mostrarGenero('naematelia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('panus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('peroneutypa')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('peziza')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('pholiota')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('physarum')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('plectania')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('pleurotus')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('pluteus')">Amanita <span class="contador">4</span></li>
+          <li onclick="mostrarGenero('psathyrella')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('ramaria')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('rheubarbariboletus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('rhodotus')">Amanita <span class="contador">4</span></li>
+          <li onclick="mostrarGenero('rubroboletus')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('russula')">Amanita <span class="contador">4</span></li>
+          <li onclick="mostrarGenero('sarcoscypha')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('schyzophyllum')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('strobilomyces')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('tapesia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('terana')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('terfezia')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('trichia')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('tricholoma')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('trichophaeopsis')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('tuber')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('verpa')">Amanita <span class="contador">2</span></li>
+          <li onclick="mostrarGenero('vibressea')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('volvariella')">Amanita <span class="contador">1</span></li>
+          <li onclick="mostrarGenero('xerocomellus')">Amanita <span class="contador">1</span></li>
+
+        </ul>
+      </aside>
+      
+
+    <main class="contenido" id="contenedorGeneros">
+
+        <div class="tabcontent genero">
+            <h2>Amanita</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita1.jpg" alt="Amanita caesarea" onclick="abrirLightbox(this)">
+                    <span>Amanita caesarea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita2.jpg" alt="Amanita codinae" onclick="abrirLightbox(this)">
+                    <span>Amanita codinae</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita3.jpg" alt="Amanita ovoidea" onclick="abrirLightbox(this)">
+                    <span>Amanita ovoidea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita4.jpg" alt="Amanita vittadinii" onclick="abrirLightbox(this)">
+                    <span>Amanita vittadinii</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita5.jpg" alt="Amanita muscaria" onclick="abrirLightbox(this)">
+                    <span>Amanita muscaria</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita6.jpg" alt="Amanita franchetii" onclick="abrirLightbox(this)">
+                    <span>Amanita franchetii</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita7.jpg" alt="Amanita rubescens" onclick="abrirLightbox(this)">
+                    <span>Amanita rubescens</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita8.jpg" alt="Amanita proxima" onclick="abrirLightbox(this)">
+                    <span>Amanita proxima</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita9.jpg" alt="Amanita phalloides" onclick="abrirLightbox(this)">
+                    <span>Amanita phalloides</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita10.jpg" alt="Amanita ponderosa" onclick="abrirLightbox(this)">
+                    <span>Amanita ponderosa</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita11.jpg" alt="Amanita submembranacea" onclick="abrirLightbox(this)">
+                    <span>Amanita submembranacea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita12.jpg" alt="Amanita citrina" onclick="abrirLightbox(this)">
+                    <span>Amanita citrina</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita13.jpg" alt="Amanita pantherina" onclick="abrirLightbox(this)">
+                    <span>Amanita pantherina</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita14.jpg" alt="Amanita nudipes" onclick="abrirLightbox(this)">
+                    <span>Amanita nudipes</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/amanita/amanita15.jpg" alt="Amanita gr vaginata" onclick="abrirLightbox(this)">
+                    <span>Amanita gr vaginata</span>
+                </div>
+            </div>
+        </div> 
+            
+        
+
+        <div class="tabcontent genero">
+            <h2>Lactarius</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius1.jpg" alt="Lactarius deliciosus" onclick="abrirLightbox(this)">
+                    <span>Lactarius deliciosus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius2.jpg" alt="Lactarius chrysorrheus" onclick="abrirLightbox(this)">
+                    <span>Lactarius chrysorrheus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius3.jpg" alt="Lactarius semianglifluus" onclick="abrirLightbox(this)">
+                    <span>Lactarius semianglifluus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius4.jpg" alt="Lactarius quieticolor" onclick="abrirLightbox(this)">
+                    <span>Lactarius quieticolor</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius5.jpg" alt="Lactarius lignyotus" onclick="abrirLightbox(this)">
+                    <span>Lactarius lignyotus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius6.jpg" alt="Lactarius necator" onclick="abrirLightbox(this)">
+                    <span>Lactarius necator</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/lactarius/lactarius7.jpg" alt="Lactarius cistophilus" onclick="abrirLightbox(this)">
+                    <span>Lactarius cistophilus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Terana</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/terana/terana1.jpg" alt="Terana caerulea" onclick="abrirLightbox(this)">
+                    <span>Terana caerulea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Aleuria</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/aleuria/aleuria1.jpg" alt="Aleuria aurantia" onclick="abrirLightbox(this)">
+                    <span>Aleuria aurantia</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Amaropostia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/amaropostia/amaropostia1.jpg" alt="Amaropostia stiptica" onclick="abrirLightbox(this)">
+                    <span>Amaropostia stiptica</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Arachnopezia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/arachnopezia/arachnopeziza1.jpg" alt="Arachnopezia aurata" onclick="abrirLightbox(this)">
+                    <span>Arachnopezia aurata</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Arcyria</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/arcyria/arcyria1.jpg" alt="Arcyria denudata" onclick="abrirLightbox(this)">
+                    <span>Arcyria denudata</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Auricularia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/auricularia/auricularia1.jpg" alt="Auricularia mesenterica" onclick="abrirLightbox(this)">
+                    <span>Auricularia mesenterica</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Battarrae</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/batarrae/batarrae1.jpg" alt="Battarrae phalloides" onclick="abrirLightbox(this)">
+                    <span>Battarrae phalloides</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/batarrae/batarrae2.jpg" alt="Battarrae phalloides" onclick="abrirLightbox(this)">
+                    <span>Battarrae phalloides</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Boletus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/boletus/boletus1.jpg" alt="Boletus edulis" onclick="abrirLightbox(this)">
+                    <span>Boletus edulis</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/boletus/boletus2.jpg" alt="Battarrae pinophilus" onclick="abrirLightbox(this)">
+                    <span>Boletus pinophilus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/boletus/boletus3.jpg" alt="Boletus spretus" onclick="abrirLightbox(this)">
+                    <span>Boletus spretus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/boletus/boletus4.jpg" alt="Boletus reticulatus" onclick="abrirLightbox(this)">
+                    <span>Boletus reticulatus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/boletus/boletus5.jpg" alt="Boletus aereus" onclick="abrirLightbox(this)">
+                    <span>Boletus aereus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Butyriboletus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/butyriboletus/butyriboletus1.jpg" alt="Butyriboletus regius" onclick="abrirLightbox(this)">
+                    <span>Butyriboletus regius</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Caloboletus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/caloboletus/caloboletus1.jpg" alt="Caloboletus calopus" onclick="abrirLightbox(this)">
+                    <span>Caloboletus calopus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Calocera</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/calocera/calocera1.jpg" alt="Calocera cornea" onclick="abrirLightbox(this)">
+                    <span>Calocera cornea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Calocybe</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/calocybe/calocybe1.jpg" alt="Calocybe hypoxantha" onclick="abrirLightbox(this)">
+                    <span>Calocybe hypoxantha</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Cantharellus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/cantharellus/cantharellus1.jpg" alt="Cantharellus pallens" onclick="abrirLightbox(this)">
+                    <span>Cantharellus pallens</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Ceratiomixa</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/ceratiomyxa/ceratiomyxa1.jpg" alt="Ceratiomixa fructiculosa" onclick="abrirLightbox(this)">
+                    <span>Ceratiomixa fructiculosa</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/ceratiomyxa/ceratiomyxa2.jpg" alt="Ceratiomixa fructiculosa" onclick="abrirLightbox(this)">
+                    <span>Ceratiomixa fructiculosa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Ceriporia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/ceriporia/ceriporia1.jpg" alt="Ceriporia purpurea" onclick="abrirLightbox(this)">
+                    <span>Ceriporia purpurea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Cheilymenia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/cheilymenia/cheilymenia1.jpg" alt="Cheilymenia stercorea" onclick="abrirLightbox(this)">
+                    <span>Cheilymenia stercorea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Chlorociboria</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/chlorociboria/chlorociboria1.jpg" alt="Chlorociboria aeruginascens" onclick="abrirLightbox(this)">
+                    <span>Chlorociboria aeruginascens</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Comatricha</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/comatricha/comatricha1.jpg" alt="Comatricha nigra" onclick="abrirLightbox(this)">
+                    <span>Comatricha nigra</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Coprinopsis</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/coprinopsis/coprinopsis1.jpg" alt="Coprinopsis romagnesiana" onclick="abrirLightbox(this)">
+                    <span>Coprinopsis romagnesiana</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Coprinus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/coprinus/coprinus1.jpg" alt="Coprinus comatus" onclick="abrirLightbox(this)">
+                    <span>Coprinus comatus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Cratarellus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/cratarellus/cratarellus1.jpg" alt="Cratarellus lutescens" onclick="abrirLightbox(this)">
+                    <span>Cratarellus lutescens</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/cratarellus/cratarellus2.jpg" alt="Cratarellus lutescens f nudipes" onclick="abrirLightbox(this)">
+                    <span>Cratarellus lutescens f nudipes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Craterium</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/craterium/craterium1.JPG" alt="Craterium ninutum" onclick="abrirLightbox(this)">
+                    <span>Craterium ninutum</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/craterium/craterium2.jpg" alt="Craterium ninutum" onclick="abrirLightbox(this)">
+                    <span>Craterium ninutum</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/craterium/craterium3.jpg" alt="Craterium leucocephalum" onclick="abrirLightbox(this)">
+                    <span>Craterium leucocephalum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Cyclocybe</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/cyclocybe/cyclocybe1.jpg" alt="Cyclocybe aegerita" onclick="abrirLightbox(this)">
+                    <span>Cyclocybe aegerita</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Diachea</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/diachea/diachea1.jpg" alt="Diachea leucopodia" onclick="abrirLightbox(this)">
+                    <span>Diachea leucopodia</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Fistulina</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/fistulina/fistulina1.jpg" alt="Fistulina hepatica" onclick="abrirLightbox(this)">
+                    <span>Fistulina hepatica</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Flavolasquia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/flavolasquia/flavolasquia1.jpg" alt="Flavolasquia1 cladopus" onclick="abrirLightbox(this)">
+                    <span>Flavolasquia cladopus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Ganoderma</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/ganoderma/ganoderma1.jpg" alt="Ganoderma lucidum" onclick="abrirLightbox(this)">
+                    <span>Ganoderma lucidum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Guepiniopsis</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/guepiniopsis/guepiniopsis1.jpg" alt="Guepiniopsis buccina" onclick="abrirLightbox(this)">
+                    <span>Guepiniopsis buccina</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Gyroporus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/gyroporus/gyroporus1.jpg" alt="Gyroporus castaneus" onclick="abrirLightbox(this)">
+                    <span>Gyroporus castaneus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Helvella</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/helvella/helvella1.jpg" alt="Helvella crispa" onclick="abrirLightbox(this)">
+                    <span>Helvella crispa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Hemileccinum</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/hemileccinum/hemileccinum1.jpg" alt="Hemileccinum impolitus" onclick="abrirLightbox(this)">
+                    <span>Hemileccinum impolitus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Hericium</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/hericium/hericium1.jpg" alt="Hericium erinaceus" onclick="abrirLightbox(this)">
+                    <span>Hericium erinaceus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Hohembuehelia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/hohembuehelia/hohembuehelia1.jpg" alt="Hohembuehelia petaloides" onclick="abrirLightbox(this)">
+                    <span>Hohembuehelia petaloides</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Hydrospisphaera</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/hydropisphaera/hydropisphaera1.jpg" alt="Hydrospisphaera peziza" onclick="abrirLightbox(this)">
+                    <span>Hydrospisphaera peziza</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Hygrophorus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/hygrophorus/hygrophorus1.jpg" alt="Hygrophorus marzuolus" onclick="abrirLightbox(this)">
+                    <span>Hygrophorus marzuolus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Imperator</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/imperator/imperator1.JPG" alt="Imperator luteocupreus" onclick="abrirLightbox(this)">
+                    <span>Imperator luteocupreus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/imperator/imperator2.jpg" alt="Imperator luteocupreus" onclick="abrirLightbox(this)">
+                    <span>Imperator luteocupreus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Kuehneromyces</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/kuehneromyces/kuehneromyces1.jpg" alt="Kuehneromyces mutabilis" onclick="abrirLightbox(this)">
+                    <span>Kuehneromyces mutabilis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Laetiporus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/laetiporus/laetiporus1.jpg" alt="Laetiporus sulphurerus" onclick="abrirLightbox(this)">
+                    <span>Laetiporus sulphurerus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Lanmaoa</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lanmaoa/lanmaoa1.jpg" alt="Lanmaoa fragans" onclick="abrirLightbox(this)">
+                    <span>Lanmaoa fragans</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Lasiobelonium</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lasiobelonium/lasiobelonium1.jpg" alt="Lasiobelonium variegatum" onclick="abrirLightbox(this)">
+                    <span>Lasiobelonium variegatum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Leccinellum</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/leccinellum/leccinellum1.jpg" alt="Leccinellum pseudoscabrum" onclick="abrirLightbox(this)">
+                    <span>Leccinellum pseudoscabrum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>lentinus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lentinus/lentinus1.jpg" alt="lentinus arcularis" onclick="abrirLightbox(this)">
+                    <span>Lentinus arcularis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Lycogala</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lycogala/lycogala1.jpg" alt="Lycogala flavofuscum" onclick="abrirLightbox(this)">
+                    <span>Lycogala flavofuscum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Lyophyllum</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/lyophyllum/lyophyllum1.JPG" alt="Lyophyllum decastes" onclick="abrirLightbox(this)">
+                    <span>Lyophyllum decastes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Macrolepiota</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/macrolepiota/macrolepiota1.jpg" alt="Macrolepiota procera" onclick="abrirLightbox(this)">
+                    <span>Macrolepiota procera</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Mitrula</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/mitrula/mitrula1.jpg" alt="Mitrula paludosa" onclick="abrirLightbox(this)">
+                    <span>Mitrula paludosa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Mollisia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/mollisia/mollisia1.jpg" alt="Mollisia cinerea" onclick="abrirLightbox(this)">
+                    <span>Mollisia cinerea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Morchella</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/morchella/morchella1.jpg" alt="Morchella vulgaris" onclick="abrirLightbox(this)">
+                    <span>Morchella vulgaris</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Mucidula</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/mucidula/mucidula1.jpg" alt="Mucidula mucida" onclick="abrirLightbox(this)">
+                    <span>Mucidula mucida</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Mycena</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena1.jpg" alt="Mycena seynii" onclick="abrirLightbox(this)">
+                    <span>Mycena seynii</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena2.jpg" alt="Mycena rosea" onclick="abrirLightbox(this)">
+                    <span>Mycena rosea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena3.jpg" alt="Mycena acicula" onclick="abrirLightbox(this)">
+                    <span>Mycena acicula</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena4.jpg" alt="Mycena renati" onclick="abrirLightbox(this)">
+                    <span>Mycena renati</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena5.jpg" alt="Mycena galericulata" onclick="abrirLightbox(this)">
+                    <span>Mycena galericulata</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena6.jpg" alt="Mycena sp" onclick="abrirLightbox(this)">
+                    <span>Mycena sp</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena7.jpg" alt="Mycena pura" onclick="abrirLightbox(this)">
+                    <span>Mycena pura</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/mycena/mycena8.jpg" alt="Mycena melligena" onclick="abrirLightbox(this)">
+                    <span>Mycena melligena</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Naematelia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/naematelia/naematelia1.jpg" alt="Naematelia aurantia" onclick="abrirLightbox(this)">
+                    <span>Naematelia aurantia</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Panus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/panus/panus1.jpg" alt="Panus conchatus" onclick="abrirLightbox(this)">
+                    <span>Panus conchatus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Peroneutypa</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/peroneutypa/peroneutypa1.jpg" alt="Peroneutypa scoparia" onclick="abrirLightbox(this)">
+                    <span>Peroneutypa scoparia</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Peziza</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/peziza/peziza1.JPG" alt="Peziza varia" onclick="abrirLightbox(this)">
+                    <span>Peziza varia</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Pholiota</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/pholiota/pholiota1.jpg" alt="Pholiota flammans" onclick="abrirLightbox(this)">
+                    <span>Pholiota flammans</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Physarum</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/physarum/physarum1.jpg" alt="Physarum leucophaeum" onclick="abrirLightbox(this)">
+                    <span>Physarum leucophaeum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Plectania</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/plectania/plectania1.jpg" alt="Plectania melastoma" onclick="abrirLightbox(this)">
+                    <span>Plestania melastoma</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabcontent genero">
+            <h2>Pleurotus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/pleurotus/pleurotus1.jpg" alt="Pleurotus eryngii" onclick="abrirLightbox(this)">
+                    <span>Pleurotus eryngii</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/pleurotus/pleurotus2.jpg" alt="Pleurotus ostreatus" onclick="abrirLightbox(this)">
+                    <span>Pleurotus ostreatus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Pluteus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/pluteus/pluteus1.jpg" alt="Plectania aurantiorugosus" onclick="abrirLightbox(this)">
+                    <span>Pluteus aurantiorugosus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/pluteus/pluteus2.jpg" alt="Plectania aurantiorugosus" onclick="abrirLightbox(this)">
+                    <span>Pluteus aurantiorugosus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/pluteus/pluteus3.jpg" alt="Plectania romelii" onclick="abrirLightbox(this)">
+                    <span>Pluteus romelii</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/pluteus/pluteus4.jpg" alt="Plectania leonis" onclick="abrirLightbox(this)">
+                    <span>Pluteus leonis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Psathyrella</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/psathyrella/psathyrella1.jpg" alt="Psathyrella spadiceogrisea" onclick="abrirLightbox(this)">
+                    <span>Psathyrella spadiceogrisea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/psathyrella/psathyrella2.jpg" alt="Psathyrella bipellis" onclick="abrirLightbox(this)">
+                    <span>Psathyrella bipellis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Ramaria</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/ramaria/ramaria1.jpg" alt="Ramaria fagetorum" onclick="abrirLightbox(this)">
+                    <span>Ramaria fagetorum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Rheubarbariboletus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/rheubarbariboletus/rheubarbariboletus1.jpg" alt="Rheubarbariboletus armeniacus" onclick="abrirLightbox(this)">
+                    <span>Rheubarbariboletus armeniacus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Rhodotus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/rhodotus/rhodotus1.jpg" alt="Rhodotus palmatus" onclick="abrirLightbox(this)">
+                    <span>Rhodotus palmatus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/rhodotus/rhodotus2.jpg" alt="Rhodotus palmatus" onclick="abrirLightbox(this)">
+                    <span>Rhodotus palmatus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/rhodotus/rhodotus3.jpg" alt="Rhodotus palmatus" onclick="abrirLightbox(this)">
+                    <span>Rhodotus palmatus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/rhodotus/rhodotus4.jpg" alt="Rhodotus palmatus" onclick="abrirLightbox(this)">
+                    <span>Rhodotus palmatus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Rubroboletus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/rubroboletus/rubroboletus1.jpg" alt="Rubroboletus rhodoxhanthus" onclick="abrirLightbox(this)">
+                    <span>Rubroboletus rhodoxhanthus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Russula</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/russula/russula1.jpg" alt="Russula aurea" onclick="abrirLightbox(this)">
+                    <span>Russula aurea</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/russula/russula2.jpg" alt="Russula virescens" onclick="abrirLightbox(this)">
+                    <span>Russula virescens</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/russula/russula3.jpg" alt="Russula torulosa" onclick="abrirLightbox(this)">
+                    <span>Russula torulosa</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/russula/russula4.jpg" alt="Russula chloroides" onclick="abrirLightbox(this)">
+                    <span>Russula chloroides</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Sarcoscypha</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/sarcoscypha/sarcoscypha1.jpg" alt="Sarcoscypha coccinea" onclick="abrirLightbox(this)">
+                    <span>Sarcoscypha coccinea</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Schyzophyllum</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/schyzophyllum/schyzophyllum1.jpg" alt="Schyzophyllum ampla" onclick="abrirLightbox(this)">
+                    <span>Schyzophyllum ampla</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Strobilomyces</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/strobilomyces/strobilomyces1.jpg" alt="Strobilomyces strobilaceus" onclick="abrirLightbox(this)">
+                    <span>Strobilomyces strobilaceus</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/strobilomyces/strobilomyces2.jpg" alt="Strobilomyces strobilaceus" onclick="abrirLightbox(this)">
+                    <span>Strobilomyces strobilaceus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Tapesia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/tapesia/tapesia1.jpg" alt="Tapesia lividofusca" onclick="abrirLightbox(this)">
+                    <span>Schyzophyllum lividofusca</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Terfezia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/terfezia/terfezia1.jpg" alt="Terfezia morenoi" onclick="abrirLightbox(this)">
+                    <span>Terfezia morenoi</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Trichia</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/trichia/trichia1.jpg" alt="Trichia decipiens" onclick="abrirLightbox(this)">
+                    <span>Trichia decipiens</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/trichia/trichia2.jpg" alt="Trichia bortrytis" onclick="abrirLightbox(this)">
+                    <span>Trichia bortrytis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Tricholoma</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/tricholoma/tricholoma1.jpg" alt="Tricholoma equestre" onclick="abrirLightbox(this)">
+                    <span>Tricholoma equestre</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/tricholoma/tricholoma2.jpg" alt="Tricholoma fracticum" onclick="abrirLightbox(this)">
+                    <span>Tricholoma fracticum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Trichophaeopsis</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/trichophaeopsis/trichophaeopsis1.jpg" alt="Trichophaeopsis bicuspis" onclick="abrirLightbox(this)">
+                    <span>Trichophaeopsis bicuspis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Tuber</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/tuber/tuber1.jpg" alt="Tuber melanosporum" onclick="abrirLightbox(this)">
+                    <span>Tuber melanosporum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Verpa</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/verpa/verpa1.jpg" alt="Verpa digitaliformis" onclick="abrirLightbox(this)">
+                    <span>Verpa digitaliformis</span>
+                </div>
+                <div class="especie">
+                    <img src="imagenes/verpa/verpa2.jpg" alt="Verpa digitaliformis" onclick="abrirLightbox(this)">
+                    <span>Verpa digitaliformis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Vibressea</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/vibressea/vibressea1.jpg" alt="Vibressea truncorum" onclick="abrirLightbox(this)">
+                    <span>Vibressea truncorum</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabcontent genero">
+            <h2>Volvariella</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/volvariella/Volvariella1.jpg" alt="Volvariella bombicyna" onclick="abrirLightbox(this)">
+                    <span>Volvariella bombicyna</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabcontent genero">
+            <h2>Xerocomellus</h2>
+            <div class="especies">
+                <div class="especie">
+                    <img src="imagenes/xerocomellus/xerocomellus1.jpg" alt="Xerocomellus redeuilhii" onclick="abrirLightbox(this)">
+                    <span>Xerocomellus redeuilhii</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+<div id="lightbox">
+    <span class="cerrar">&times;</span>
+
+    <button class="flecha izquierda">&#10094;</button>
+
+    <img id="lightboxImagen" src="">
+    <p id="lightboxTexto"></p>
+
+    <button class="flecha derecha">&#10095;</button>
+</div>
+
+</section>
+
+<footer>
+    <p>Contacto: <a href="mailto:emilio@email.com">emilio@email.com</a></p>
+</footer>
+
+<script>
+    // ORDENAR SALIDAS POR FECHA (más reciente primero)
+const contenedorSalidas = document.getElementById("contenedor-salidas");
+
+if (contenedorSalidas) {
+    const salidas = Array.from(contenedorSalidas.querySelectorAll(".salida"));
+
+    salidas.sort((a, b) => {
+        return new Date(b.dataset.fecha) - new Date(a.dataset.fecha);
+    });
+
+    salidas.forEach(salida => {
+        contenedorSalidas.appendChild(salida);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const listaGeneros = document.getElementById("listaGeneros");
+const generos = Array.from(document.querySelectorAll(".genero"));
+const lightbox = document.getElementById("lightbox");
+const lightboxImagen = document.getElementById("lightboxImagen");
+const lightboxTexto = document.getElementById("lightboxTexto");
+const flechaIzq = document.querySelector(".flecha.izquierda");
+const flechaDer = document.querySelector(".flecha.derecha");
+
+let imagenes = [];
+let indiceActual = 0;
+
+// 🔠 Orden alfabético por nombre del género
+generos.sort((a, b) => {
+    const nombreA = a.querySelector("h2").textContent.toLowerCase();
+    const nombreB = b.querySelector("h2").textContent.toLowerCase();
+    return nombreA.localeCompare(nombreB);
+});
+
+// Limpiar lista y ocultar todas las secciones
+listaGeneros.innerHTML = "";
+generos.forEach(g => g.style.display = "none");
+
+// Crear lista de géneros en la sidebar con contador verde
+generos.forEach((genero, index) => {
+    const nombre = genero.querySelector("h2").textContent;
+    const total = genero.querySelectorAll(".especie").length;
+
+    const li = document.createElement("li");
+    li.textContent = nombre + " ";
+
+    const span = document.createElement("span");
+    span.textContent = `(${total})`;
+    span.style.color = "green";
+    span.style.fontWeight = "bold";
+
+    li.appendChild(span);
+    listaGeneros.appendChild(li);
+
+    li.addEventListener("click", () => {
+        generos.forEach(g => g.style.display = "none");
+        genero.style.display = "block";
+        genero.scrollIntoView({ behavior: "smooth" });
+    });
+});
+
+// Mostrar la primera sección alfabética
+if (generos.length > 0) {
+    generos[0].style.display = "block";
+}
+
+// BUSCADOR
+const buscador = document.getElementById("buscadorGenero");
+if (buscador) {
+    buscador.addEventListener("keyup", () => {
+        const filtro = buscador.value.toLowerCase();
+        const listaItems = document.querySelectorAll("#listaGeneros li");
+
+        generos.forEach((genero, index) => {
+            const nombreGenero = genero.querySelector("h2").textContent.toLowerCase();
+            const especies = genero.querySelectorAll(".especie");
+
+            let generoCoincide = nombreGenero.includes(filtro);
+            let algunaEspecie = false;
+
+            especies.forEach(especie => {
+                const texto = especie.textContent.toLowerCase();
+                especie.style.display = texto.includes(filtro) ? "block" : "none";
+                if (texto.includes(filtro)) algunaEspecie = true;
+            });
+
+            if (generoCoincide || algunaEspecie || filtro === "") {
+                genero.style.display = "block";
+                listaItems[index].style.display = "list-item";
+            } else {
+                genero.style.display = "none";
+                listaItems[index].style.display = "none";
+            }
+        });
+    });
+}
+
+// ===============================
+// LIGHTBOX CON FLECHAS
+// ===============================
+
+imagenes = Array.from(document.querySelectorAll("img[onclick='abrirLightbox(this)']"));
+
+window.abrirLightbox = function(img) {
+    indiceActual = imagenes.indexOf(img);
+    mostrarImagen();
+    lightbox.style.display = "flex";
+};
+
+function mostrarImagen() {
+    const img = imagenes[indiceActual];
+    lightboxImagen.src = img.src;
+    lightboxTexto.textContent = img.alt;
+}
+
+if (flechaDer) {
+    flechaDer.addEventListener("click", () => {
+        indiceActual = (indiceActual + 1) % imagenes.length;
+        mostrarImagen();
+    });
+}
+
+if (flechaIzq) {
+    flechaIzq.addEventListener("click", () => {
+        indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+        mostrarImagen();
+    });
+}
+
+// Cerrar al hacer click fuera
+lightbox.addEventListener("click", e => {
+    if (e.target.id === "lightbox") {
+        lightbox.style.display = "none";
+    }
+});
+
+// Navegación con teclado
+document.addEventListener("keydown", (e) => {
+    if (lightbox.style.display === "flex") {
+        if (e.key === "ArrowRight") {
+            indiceActual = (indiceActual + 1) % imagenes.length;
+            mostrarImagen();
+        }
+        if (e.key === "ArrowLeft") {
+            indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+            mostrarImagen();
+        }
+        if (e.key === "Escape") {
+            lightbox.style.display = "none";
+        }
+    }
+});
+
+});
+
+    </script>
+    
+    
+
+
+
+
+    
+
+            
+            
+
+</body>
+</html>
