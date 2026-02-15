@@ -18,7 +18,6 @@ body {
     color: #2f5d3a;
 }
 
-/* ===== SECCIONES ===== */
 section {
     padding: 30px 20px;
     max-width: 900px;
@@ -75,7 +74,7 @@ section {
 .layout {
     display: flex;
     gap: 25px;
-    overflow: visible;  /* asegura que hijos no queden cortados */
+    position: relative;
 }
 
 /* ===== SIDEBAR ===== */
@@ -88,7 +87,7 @@ section {
     background: #f5f5f5;
     padding: 15px;
     border-radius: 10px;
-    z-index: 1;
+    z-index: 20; /* asegura que esté encima de secciones menos importantes */
 }
 
 .sidebar ul {
@@ -107,31 +106,37 @@ section {
     background: #ddd;
 }
 
+.sidebar li.activo {
+    background: #5a8f65;
+    color: white;
+}
+
 /* ===== CONTENIDO ===== */
 .contenido {
     flex: 1;
-    position: relative;  /* referencia para la galería */
-    z-index: 2;
+    position: relative;
+    z-index: 10; /* asegura que contenido esté sobre fondo */
 }
-/* ====== GALERÍA DE ESPECIES ====== */
+
+/* ===== GALERÍA DE ESPECIES ===== */
 .tabcontent {
-    display: none; /* solo se muestra la pestaña activa */
+    display: none;
 }
 
 .especies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 15px;
-    position: relative;   /* importante para z-index */
-    z-index: 10;          /* asegura que esté por encima de otros elementos */
-    background: #f1f6f2;  /* opcional: fondo claro para evitar que se vea detrás */
+    position: relative;
+    z-index: 10;
+    background: #f1f6f2;
     padding: 10px;
     border-radius: 12px;
 }
 
 .especie {
     text-align: center;
-    position: relative;    /* permite controlar z-index de cada especie */
+    position: relative;
     z-index: 10;
 }
 
@@ -142,7 +147,7 @@ section {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s ease;
-    position: relative;     /* necesario para z-index */
+    position: relative;
     z-index: 10;
 }
 
@@ -157,16 +162,16 @@ section {
     z-index: 10;
 }
 
-/* ====== LIGHTBOX ====== */
+/* ===== LIGHTBOX ===== */
 #lightbox {
     display: none;
     position: fixed;
-    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    inset: 0;
     background: rgba(0,0,0,0.85);
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 9999; /* muy alto para estar siempre encima */
+    z-index: 9999; /* siempre encima de todo */
 }
 
 #lightbox img {
@@ -187,7 +192,6 @@ section {
     letter-spacing: 0.4px;
 }
 
-/* Flechas del lightbox */
 .flecha {
     position: absolute;
     top: 50%;
@@ -199,7 +203,7 @@ section {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 50%;
-    z-index: 10000; /* encima de todo */
+    z-index: 10000;
 }
 
 .flecha.izquierda {
@@ -214,20 +218,6 @@ section {
     background: rgba(0,0,0,0.9);
 }
 
-/* ====== MÓVIL ====== */
-@media (max-width: 768px) {
-    .especies {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
-        padding: 5px;
-    }
-
-    .especie img {
-        height: 140px;
-    }
-}
-
-
 /* ===== SALIDAS ===== */
 #salidas-campo {
     margin-bottom: 50px;
@@ -239,8 +229,6 @@ section {
     border-radius: 14px;
     padding: 20px;
     margin-top: 25px;
-    position: relative;
-    z-index: 2;
 }
 
 .salida h3 {
@@ -250,6 +238,7 @@ section {
 
 .fecha, .lugar {
     font-size: 14px;
+    color: #777;
 }
 
 .lugar {
@@ -262,6 +251,7 @@ section {
     gap: 12px;
     margin-top: 15px;
     flex-wrap: wrap;
+    z-index: 10;
 }
 
 .fotos-salida img {
@@ -270,12 +260,27 @@ section {
     cursor: pointer;
 }
 
+.flecha {
+    position: absolute;
+}
 
+/* ===== ESTILOS LISTA DE GÉNEROS ===== */
+#listaGeneros {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    margin-top: 40px;
+#listaGeneros li {
+    margin-bottom: 8px;
+    color: black;
+    font-size: 16px;
+}
+
+#listaGeneros span {
+    color: green !important;
+    font-weight: bold;
+    margin-left: 6px;
 }
 
 /* ===== MÓVIL ===== */
@@ -290,9 +295,9 @@ footer {
     }
 
     .especies {
-        justify-content: center;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 12px;
+        padding: 5px;
     }
 
     .especie img {
@@ -305,28 +310,6 @@ footer {
     }
 }
 
-/* Asegura que la galería esté por encima de otros elementos */
-.tabcontent {
-    position: relative; /* importante */
-    z-index: 10;        /* un valor alto para que se muestre arriba */
-}
-
-/* Asegura que cada imagen se vea correctamente */
-.especie img {
-    position: relative;
-    z-index: 11;       /* más alto que el contenedor */
-}
-
-/* Ajuste para móvil */
-@media (max-width: 768px) {
-    .tabcontent {
-        z-index: 10;
-    }
-
-    .especie img {
-        z-index: 11;
-    }
-}
 
 </style>
 </head>
