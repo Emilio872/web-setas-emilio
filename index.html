@@ -9,7 +9,6 @@
 
 <style id="estilos2026">
 
-
     /* ===== BASE ===== */
     body {
         font-family: 'Nunito', sans-serif;
@@ -31,7 +30,7 @@
     /* ===== CABECERA ===== */
     .hero {
         background: linear-gradient(135deg, #3f6f4e, #5a8f65);
-        padding: 50px 20px;
+        padding: 40px 20px;
         border-radius: 15px;
         color: white;
         text-align: center;
@@ -49,8 +48,8 @@
     }
     
     .foto-perfil {
-        width: 180px;
-        height: 180px;
+        width: 150px;
+        height: 150px;
         object-fit: cover;
         border-radius: 50%;
         border: 5px solid white;
@@ -87,7 +86,7 @@
         background: #f5f5f5;
         padding: 15px;
         border-radius: 10px;
-        z-index: 100; /* asegura que esté encima de secciones menos importantes */
+        z-index: 100;
     }
     
     .sidebar ul {
@@ -142,7 +141,7 @@
         object-fit: cover;
         border-radius: 10px;
         cursor: pointer;
-        transition: transform 0.2s ease;   
+        transition: transform 0.2s ease;
     }
     
     .especie img:hover {
@@ -165,7 +164,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        z-index: 9999; /* siempre encima de todo */
+        z-index: 9999;
     }
     
     #lightbox img {
@@ -245,20 +244,17 @@
         gap: 12px;
         margin-top: 15px;
         flex-wrap: wrap;
-        z-index: 10;
     }
     
     .fotos-salida img {
-        width: 140px;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
         border-radius: 8px;
         cursor: pointer;
     }
     
-    .flecha {
-        position: absolute;
-    }
-    
-    /* ===== ESTILOS LISTA DE GÉNEROS ===== */
+    /* ===== LISTA DE GÉNEROS ===== */
     #listaGeneros {
         list-style: none;
         padding: 0;
@@ -280,106 +276,47 @@
     /* ===== MÓVIL ===== */
     @media (max-width: 768px) {
         .layout {
-            flex-direction: column;
+            flex-direction: column !important;
         }
     
         .sidebar {
-            width: 100%;
-            max-height: 200px;
+            position: relative !important;
+            top: auto !important;
+            width: 100% !important;
+            max-height: none !important;
+            z-index: auto !important;
+        }
+    
+        .contenido {
+            width: 100% !important;
         }
     
         .especies {
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-            padding: 5px;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+            padding: 5px !important;
         }
     
         .especie img {
-            height: 140px;
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
         }
     
         .fotos-salida img {
             width: 100%;
-            max-width: 250px;
+            max-width: 200px;
+            height: auto;
+        }
+    
+        .foto-perfil {
+            width: 120px;
+            height: 120px;
         }
     }
-    /* ===== SOLUCIÓN DEFINITIVA REAL PARA MÓVIL ===== */
-    @media (max-width: 768px) {
     
-    .layout {
-        display: block !important;
-    }
-    
-    .sidebar {
-        position: static !important;
-        width: 100% !important;
-        max-height: none !important;
-        overflow: visible !important;
-        margin-bottom: 20px !important;
-    }
-    
-    .contenido {
-        width: 100% !important;
-        display: block !important;
-    }
-    
-    .especies {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
-    }
-    
-    .especie {
-        position: relative !important;
-    }
-    
-    .especie img {
-        width: 100% !important;
-        height: auto !important;
-        position: relative !important;
-    }
-    
-    }
-    
-    body {
-        background: red !important;
-    }
-    
-    /* ===== CABECERA ===== */
-.hero img,
-.foto-perfil {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-/* ===== FOTOS DE SALIDAS ===== */
-.fotos-salida img {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* ===== MÓVIL ===== */
-@media (max-width: 768px) {
-
-.hero img,
-.foto-perfil {
-    width: 110px;
-    height: 110px;
-}
-
-.fotos-salida img {
-    width: 100%;
-    max-width: 220px;
-    height: auto;
-}
-
-}
-
     </style>
+    
 </head>
 
 <body>
