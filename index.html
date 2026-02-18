@@ -314,7 +314,123 @@
             height: 120px;
         }
     }
-    
+    /* ===== SOBRE MI MINI ===== */
+    .sobre-mi-sidebar {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #5a8f65;
+    font-size: 0.9em;
+}
+
+.sobre-mi-sidebar h3 {
+    margin: 0 0 8px 0;
+}
+
+.sobre-mi-sidebar p {
+    margin: 0;
+}
+
+
+
+/* móvil */
+@media (max-width: 768px) {
+    .sobre-mi-mini {
+        margin: 10px;
+        font-size: 0.9em;
+    }
+}
+/* SIDEBAR como columna vertical */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+/* lista con scroll */
+#listaGeneros {
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* SOBRE MI FIJO ABAJO */
+.sobre-mi-sidebar {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid #5a8f65;
+    font-size: 0.9em;
+    background: #f1f6f2;
+}
+
+/* móvil */
+@media (max-width: 768px) {
+
+.sidebar {
+    height: auto;
+}
+
+#listaGeneros {
+    overflow: visible;
+}
+
+.sobre-mi-sidebar {
+    border-top: none;
+    border-bottom: 2px solid #5a8f65;
+    padding-bottom: 10px;
+}
+
+}
+/* Estilo opcional para "Sobre mí" */
+.sobre-mi-sidebar {
+    background-color: #f9f3e7; /* color claro de fondo */
+    border-radius: 8px;        /* bordes redondeados */
+    padding: 10px;             /* espacio interno */
+    font-size: 0.9em;          /* un poco más pequeño */
+    line-height: 1.4em;        /* mejor lectura */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra sutil */
+    margin-top: 15px;          /* separación de la lista */
+}
+.sobre-mi-sidebar h3 {
+    font-size: 1em;            /* título más compacto */
+    margin-bottom: 5px;
+}
+.sobre-mi-sidebar p {
+    margin: 0;                 /* eliminar margen extra */
+}
+/* BUSCADOR */
+.buscador-container {
+    text-align: center;       /* centra el input */
+    margin-bottom: 15px;      /* espacio debajo */
+}
+.buscador-container input {
+    width: 80%;               /* ancho más reducido */
+    max-width: 250px;         /* ancho máximo */
+    padding: 6px 10px;        /* tamaño interno más compacto */
+    font-size: 0.9em;         /* un poco más pequeño */
+    border: 1px solid #ccc;   /* borde suave */
+    border-radius: 6px;       /* bordes redondeados */
+    box-sizing: border-box;
+}
+
+/* SOBRE MÍ */
+.sobre-mi-sidebar {
+    background-color: #fff3f0; /* color de fondo visible */
+    border: 2px solid #0f8a3e; /* borde rojo suave */
+    border-radius: 10px;        /* bordes redondeados */
+    padding: 12px;              /* espacio interno suficiente */
+    font-size: 0.95em;          /* tamaño legible */
+    line-height: 1.5em;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15); /* sombra destacada */
+    margin-top: 15px;
+}
+.sobre-mi-sidebar h3 {
+    font-size: 1.05em;
+    margin-bottom: 6px;
+    color: #d43f3a; /* título rojo para destacar */
+}
+.sobre-mi-sidebar p {
+    margin: 0;
+}
+
     </style>
     
 </head>
@@ -328,11 +444,8 @@
         <p class="frase">Fotografía de setas · Naturaleza · Aprendizaje</p>
     </header>
 
-    <!-- SOBRE MÍ -->
-    <section>
-        <h2>Sobre mí</h2>
-        <p>Me apasiona la naturaleza y estoy empezando en el mundo de la fotografía de setas. Aquí compartiré mis aprendizajes y algunas fotos.</p>
-    </section>
+   
+    
 
 
     <section id="salidas-campo">
@@ -361,6 +474,35 @@
                 <img src="imagenesdesalidas/salida1/lamanchuela3.jpg" alt="Comatricha nigra" onclick="abrirLightbox(this)">
             </div>
         </article>
+
+        <article class="salida">
+            <h3>🍄 Cuenca</h3>
+            <span class="fecha">15 de febrero de 2026</span>
+            <p class="lugar">📍 Casas de Haro</p>
+    
+            <p>
+                Jornada húmeda y con buena temperatura déspues de muchos días de lluvia
+                En bosque mediterráneo, con Pinus pinea, Pinus halepensis, Quercus rotundifolia y Quercus coccifera. 
+                La intención de esta salida era poder fotografiar alguna Orquídea silvestre, pero aún no habian salido.
+                Eso sí, pude disfrutar de una gran variedad de especies de hongos, todos del grupo de los Ascomycetes.
+                Cabe destacar el género Helvella, que pude ver hasta 4 especies distintas, y alguna sorpresa como Tarzetta oblongispora y Geopora clausa
+                que este género está en revisión y parece ser que pasará a llamarse Sepultaria clausa-
+            
+        
+            </p>
+    
+            <div class="fotos-salida">
+                <img src="imagenesdesalidas/salida2/pinardeminaya.jpg" alt="Sepultaria clausa" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya1.jpg" alt="Sepultaria clausa" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya2.jpg" alt="Dissingia leucomelas = Helvella Leucomelaena" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya3.jpg" alt="Helvella helvellula" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya4.jpg" alt="Helvella juniperi" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya5.jpg" alt="Helvella semiobruta" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya6.jpg" alt="Tarzetta oblongispora" onclick="abrirLightbox(this)">
+                <img src="imagenesdesalidas/salida2/pinardeminaya7.jpg" alt="Fuscoporia torulosus" onclick="abrirLightbox(this)">
+                   
+            </div>
+        </article>
     
     </section>
     
@@ -369,16 +511,20 @@
 <h2>Fotografía de setas</h2>
 
 
-<div class="buscador-container">
-    <input id="buscadorGenero" type="text" placeholder="Buscar género..." onkeyup="filtrar()">
-</div>
+
 
 
 <div class="layout">
 
     <aside class="sidebar">
+
+        <div class="buscador-container">
+            <input id="buscadorGenero" type="text" placeholder="Buscar género..." onkeyup="filtrar()">
+        </div>
+
         <h3>Géneros</h3>
         <ul id="listaGeneros">
+        
           <li onclick="mostrarGenero('aleuria')">Amanita <span class="contador">1</span></li> 
           <li onclick="mostrarGenero('amanita')">Amanita <span class="contador">15</span></li>
           <li onclick="mostrarGenero('amaropostia')">Amanita <span class="contador">1</span></li>
@@ -457,9 +603,15 @@
           <li onclick="mostrarGenero('vibressea')">Amanita <span class="contador">1</span></li>
           <li onclick="mostrarGenero('volvariella')">Amanita <span class="contador">1</span></li>
           <li onclick="mostrarGenero('xerocomellus')">Amanita <span class="contador">1</span></li>
+        </ul> 
 
-        </ul>
-      </aside>
+           <!-- SOBRE MÍ -->
+    <div class="sobre-mi-sidebar">
+        <h3>Sobre mí</h3>
+        <p>Me apasiona la naturaleza y estoy empezando en el mundo de la fotografía de setas. Aquí compartiré mis aprendizajes y algunas fotos.</p>
+    </div>
+
+</aside>
       
 
     <main class="contenido" id="contenedorGeneros">
